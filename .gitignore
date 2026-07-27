@@ -1,0 +1,19 @@
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# IntelliJ
+.idea/
+*.iml
+
+# Angular / Node
+node_modules/
+dist/
+.angular/
+
+# Env & logs
+.env
+*.log
+
+# OS
+.DS_Store

@@ -1,6 +1,8 @@
 package com.oie.taskmanagement.controller;
 
 
+import com.oie.taskmanagement.dto.LoginRequest;
+import com.oie.taskmanagement.dto.LoginResponse;
 import com.oie.taskmanagement.dto.RegisterRequest;
 import com.oie.taskmanagement.dto.UserResponse;
 import com.oie.taskmanagement.service.AuthService;
@@ -24,5 +26,10 @@ public class AuthController {
     public ResponseEntity<UserResponse> createUser(@Valid @RequestBody RegisterRequest registerRequest) {
         UserResponse response = authService.register(registerRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
+        LoginResponse loginResponse = authService.login(request);
+        return ResponseEntity.status(HttpStatus.OK).body(loginResponse);
     }
 }

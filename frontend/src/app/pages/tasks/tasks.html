@@ -1,1 +1,8 @@
-<p>tasks works!</p>
+<h2>My Tasks</h2>
+
+@for (task of tasks(); track task.id) {
+<div>
+  <strong>{{ task.title }}</strong>
+  — {{ task.status }} / {{ task.priority }}
+</div>
+}

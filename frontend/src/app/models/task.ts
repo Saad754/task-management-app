@@ -8,4 +8,15 @@ export interface Task {
   status: TaskStatus;
   priority: TaskPriority;
 }
+export interface CreateTaskRequest {
+  title: string;
+  description: string;
+  priority: TaskPriority;
+}
 
+export interface UpdateTaskRequest {
+  title: string;
+  description: string;
+  priority: TaskPriority;
+  status: TaskStatus;
+}

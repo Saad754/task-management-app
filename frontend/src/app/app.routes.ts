@@ -8,6 +8,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: Login },
   { path: 'task-form', component: TaskForm },
+  { path: 'task-form/:id', component: TaskForm },
   { path: 'register', component: Register },
   { path: 'tasks', component: Tasks },
   { path: '**', redirectTo: 'login' }

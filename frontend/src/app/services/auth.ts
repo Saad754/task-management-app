@@ -2,11 +2,12 @@ import { Service, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LoginRequest, LoginResponse, RegisterRequest, User } from '../models/auth';
+import { environment } from '../environments/environment';
 
 @Service()
 export class Auth {
   private http = inject(HttpClient);
-  private baseUrl = 'http://localhost:8080/api/auth';
+  private baseUrl = `${environment.apiUrl}/auth`;
   private tokenKey = 'auth_token';
 
   saveToken(token: string): void {

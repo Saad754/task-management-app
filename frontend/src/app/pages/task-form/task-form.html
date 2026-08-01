@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+  <div class="col-md-7">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h4 class="card-title mb-4">{{ taskId() ? 'Edit Task' : 'New Task' }}</h4>
+
+        <div class="mb-3">
+          <label class="form-label">Title</label>
+          <input type="text" class="form-control" [(ngModel)]="title" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          <textarea class="form-control" rows="3" [(ngModel)]="description"></textarea>
+        </div>
+
+        <div class="row g-3 mb-4">
+          <div class="col-sm-6">
+            <label class="form-label">Priority</label>
+            <select class="form-select" [(ngModel)]="priority">
+              <option value="LOW">LOW</option>
+              <option value="MEDIUM">MEDIUM</option>
+              <option value="HIGH">HIGH</option>
+            </select>
+          </div>
+
+          @if (taskId()) {
+          <div class="col-sm-6">
+            <label class="form-label">Status</label>
+            <select class="form-select" [(ngModel)]="status">
+              <option value="TODO">TODO</option>
+              <option value="IN_PROGRESS">IN_PROGRESS</option>
+              <option value="DONE">DONE</option>
+            </select>
+          </div>
+          }
+        </div>
+
+        <button class="btn btn-primary" (click)="onSave()">Save</button>
+        <a routerLink="/tasks" class="btn btn-link">Cancel</a>
+
+        @if (error()) {
+        <div class="alert alert-danger mt-3 mb-0">{{ error() }}</div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

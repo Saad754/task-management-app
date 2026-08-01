@@ -1,7 +1,7 @@
 Feature: User registration
 
   Scenario: Registration Succeeds
-    Given no user is registered with email "saad@example.com" and username "saad"
+    Given no users are registered
     When someone registers with username "saad" and email "saad@example.com"
     Then the registration is accepted
 

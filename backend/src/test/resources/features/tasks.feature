@@ -2,8 +2,8 @@ Feature: Task management
 
   Scenario: A user creates a task successfully
     Given a user "saad" exists
-    When user "saad" tries to create a task titled "Test task 1" with priority HIGH
-    Then the task is created with status TODO
+    When user "saad" tries to create a task titled "Test task 1" with priority "HIGH"
+    Then the task is created with status "TODO"
 
   Scenario: A user sees only their own tasks in the list
     Given a user "saad" owns a task titled "Test task 1"

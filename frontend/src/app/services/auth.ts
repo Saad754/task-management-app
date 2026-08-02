@@ -1,8 +1,8 @@
-import { Service, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { LoginRequest, LoginResponse, RegisterRequest, User } from '../models/auth';
-import { environment } from '../environments/environment';
+import {inject, Service} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {LoginRequest, LoginResponse, RegisterRequest, User} from '../models/auth';
+import {environment} from '../environments/environment';
 
 @Service()
 export class Auth {

@@ -1,8 +1,8 @@
-import { Service, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Task, TaskStatus, TaskPriority, CreateTaskRequest, UpdateTaskRequest } from '../models/task';
-import { environment } from '../environments/environment';
+import {inject, Service} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {CreateTaskRequest, Task, TaskPriority, TaskStatus, UpdateTaskRequest} from '../models/task';
+import {environment} from '../environments/environment';
 
 @Service()
 export class TaskService {

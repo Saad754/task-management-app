@@ -1,8 +1,8 @@
-import { Component, signal, inject, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Router, ActivatedRoute, RouterLink } from '@angular/router';
-import { TaskService } from '../../services/task';
-import { TaskPriority, TaskStatus } from '../../models/task';
+import {Component, inject, OnInit, signal} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import {TaskService} from '../../services/task';
+import {TaskPriority, TaskStatus} from '../../models/task';
 
 @Component({
   selector: 'app-task-form',

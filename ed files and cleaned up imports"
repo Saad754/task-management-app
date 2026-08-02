@@ -1,0 +1,345 @@
+[1mdiff --git a/backend/src/main/java/com/oie/taskmanagement/config/SecurityConfig.java b/backend/src/main/java/com/oie/taskmanagement/config/SecurityConfig.java[m
+[1mindex 26013d3..de3ff37 100644[m
+[1m--- a/backend/src/main/java/com/oie/taskmanagement/config/SecurityConfig.java[m
+[1m+++ b/backend/src/main/java/com/oie/taskmanagement/config/SecurityConfig.java[m
+[36m@@ -1,17 +1,20 @@[m
+ package com.oie.taskmanagement.config;[m
+[32m+[m
+ import com.oie.taskmanagement.security.JwtAuthenticationFilter;[m
+ import org.springframework.context.annotation.Bean;[m
+ import org.springframework.context.annotation.Configuration;[m
+[31m-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;[m
+[31m-import org.springframework.security.crypto.password.PasswordEncoder;[m
+ import org.springframework.security.config.annotation.web.builders.HttpSecurity;[m
+ import org.springframework.security.config.http.SessionCreationPolicy;[m
+[32m+[m[32mimport org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;[m
+[32m+[m[32mimport org.springframework.security.crypto.password.PasswordEncoder;[m
+ import org.springframework.security.web.SecurityFilterChain;[m
+ import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;[m
+ import org.springframework.web.cors.CorsConfiguration;[m
+ import org.springframework.web.cors.CorsConfigurationSource;[m
+ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;[m
+[32m+[m
+ import java.util.List;[m
+[32m+[m
+ @Configuration[m
+ public class SecurityConfig {[m
+     private final JwtAuthenticationFilter jwtAuthenticationFilter;[m
+[1mdiff --git a/backend/src/main/java/com/oie/taskmanagement/security/JwtAuthenticationFilter.java b/backend/src/main/java/com/oie/taskmanagement/security/JwtAuthenticationFilter.java[m
+[1mindex ca293ab..ad7a128 100644[m
+[1m--- a/backend/src/main/java/com/oie/taskmanagement/security/JwtAuthenticationFilter.java[m
+[1m+++ b/backend/src/main/java/com/oie/taskmanagement/security/JwtAuthenticationFilter.java[m
+[36m@@ -7,12 +7,12 @@[m [mimport jakarta.servlet.http.HttpServletRequest;[m
+ import jakarta.servlet.http.HttpServletResponse;[m
+ import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;[m
+ import org.springframework.security.core.Authentication;[m
+[32m+[m[32mimport org.springframework.security.core.context.SecurityContextHolder;[m
+ import org.springframework.stereotype.Component;[m
+ import org.springframework.web.filter.OncePerRequestFilter;[m
+ [m
+[31m-import org.springframework.security.core.context.SecurityContextHolder;[m
+[31m-import java.util.List;[m
+ import java.io.IOException;[m
+[32m+[m[32mimport java.util.List;[m
+ [m
+ @Component[m
+ public class JwtAuthenticationFilter extends OncePerRequestFilter {[m
+[1mdiff --git a/backend/src/main/java/com/oie/taskmanagement/security/JwtService.java b/backend/src/main/java/com/oie/taskmanagement/security/JwtService.java[m
+[1mindex 77a2c9b..9748085 100644[m
+[1m--- a/backend/src/main/java/com/oie/taskmanagement/security/JwtService.java[m
+[1m+++ b/backend/src/main/java/com/oie/taskmanagement/security/JwtService.java[m
+[36m@@ -1,11 +1,12 @@[m
+ package com.oie.taskmanagement.security;[m
+ [m
+[32m+[m[32mimport io.jsonwebtoken.Jwts;[m
+ import io.jsonwebtoken.io.Decoders;[m
+ import io.jsonwebtoken.security.Keys;[m
+[31m-import javax.crypto.SecretKey;[m
+ import org.springframework.beans.factory.annotation.Value;[m
+ import org.springframework.stereotype.Component;[m
+[31m-import io.jsonwebtoken.Jwts;[m
+[32m+[m
+[32m+[m[32mimport javax.crypto.SecretKey;[m
+ import java.util.Date;[m
+ [m
+ @Component[m
+[1mdiff --git a/frontend/src/app/app.config.ts b/frontend/src/app/app.config.ts[m
+[1mindex a03215d..5b9ee44 100644[m
+[1m--- a/frontend/src/app/app.config.ts[m
+[1m+++ b/frontend/src/app/app.config.ts[m
+[36m@@ -1,8 +1,8 @@[m
+[31m-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';[m
+[31m-import { provideRouter } from '@angular/router';[m
+[31m-import { provideHttpClient, withInterceptors } from '@angular/common/http';[m
+[31m-import { routes } from './app.routes';[m
+[31m-import { authInterceptor } from './services/auth-interceptor';[m
+[32m+[m[32mimport {ApplicationConfig, provideBrowserGlobalErrorListeners} from '@angular/core';[m
+[32m+[m[32mimport {provideRouter} from '@angular/router';[m
+[32m+[m[32mimport {provideHttpClient, withInterceptors} from '@angular/common/http';[m
+[32m+[m[32mimport {routes} from './app.routes';[m
+[32m+[m[32mimport {authInterceptor} from './services/auth-interceptor';[m
+ [m
+ export const appConfig: ApplicationConfig = {[m
+   providers: [[m
+[1mdiff --git a/frontend/src/app/app.routes.ts b/frontend/src/app/app.routes.ts[m
+[1mindex 7042896..2101290 100644[m
+[1m--- a/frontend/src/app/app.routes.ts[m
+[1m+++ b/frontend/src/app/app.routes.ts[m
+[36m@@ -1,8 +1,8 @@[m
+[31m-import { Routes } from '@angular/router';[m
+[31m-import { Login } from './pages/login/login';[m
+[31m-import { TaskForm } from './pages/task-form/task-form';[m
+[31m-import { Register } from './pages/register/register';[m
+[31m-import { Tasks } from './pages/tasks/tasks';[m
+[32m+[m[32mimport {Routes} from '@angular/router';[m
+[32m+[m[32mimport {Login} from './pages/login/login';[m
+[32m+[m[32mimport {TaskForm} from './pages/task-form/task-form';[m
+[32m+[m[32mimport {Register} from './pages/register/register';[m
+[32m+[m[32mimport {Tasks} from './pages/tasks/tasks';[m
+ [m
+ export const routes: Routes = [[m
+   { path: '', redirectTo: 'login', pathMatch: 'full' },[m
+[1mdiff --git a/frontend/src/app/app.spec.ts b/frontend/src/app/app.spec.ts[m
+[1mindex f13c264..980a7e6 100644[m
+[1m--- a/frontend/src/app/app.spec.ts[m
+[1m+++ b/frontend/src/app/app.spec.ts[m
+[36m@@ -1,5 +1,5 @@[m
+[31m-import { TestBed } from '@angular/core/testing';[m
+[31m-import { App } from './app';[m
+[32m+[m[32mimport {TestBed} from '@angular/core/testing';[m
+[32m+[m[32mimport {App} from './app';[m
+ [m
+ describe('App', () => {[m
+   beforeEach(async () => {[m
+[1mdiff --git a/frontend/src/app/app.ts b/frontend/src/app/app.ts[m
+[1mindex 2936df2..d0987b3 100644[m
+[1m--- a/frontend/src/app/app.ts[m
+[1m+++ b/frontend/src/app/app.ts[m
+[36m@@ -1,5 +1,5 @@[m
+[31m-import { Component, signal } from '@angular/core';[m
+[31m-import { RouterOutlet } from '@angular/router';[m
+[32m+[m[32mimport {Component, signal} from '@angular/core';[m
+[32m+[m[32mimport {RouterOutlet} from '@angular/router';[m
+ [m
+ @Component({[m
+   selector: 'app-root',[m
+[1mdiff --git a/frontend/src/app/pages/login/login.spec.ts b/frontend/src/app/pages/login/login.spec.ts[m
+[1mindex 1ee4152..34e09b9 100644[m
+[1m--- a/frontend/src/app/pages/login/login.spec.ts[m
+[1m+++ b/frontend/src/app/pages/login/login.spec.ts[m
+[36m@@ -1,6 +1,6 @@[m
+[31m-import { ComponentFixture, TestBed } from '@angular/core/testing';[m
+[32m+[m[32mimport {ComponentFixture, TestBed} from '@angular/core/testing';[m
+ [m
+[31m-import { Login } from './login';[m
+[32m+[m[32mimport {Login} from './login';[m
+ [m
+ describe('Login', () => {[m
+   let component: Login;[m
+[1mdiff --git a/frontend/src/app/pages/login/login.ts b/frontend/src/app/pages/login/login.ts[m
+[1mindex bf764d0..1b6dfd5 100644[m
+[1m--- a/frontend/src/app/pages/login/login.ts[m
+[1m+++ b/frontend/src/app/pages/login/login.ts[m
+[36m@@ -1,8 +1,8 @@[m
+[31m-import { Component, signal, inject } from '@angular/core';[m
+[31m-import { FormsModule } from '@angular/forms';[m
+[31m-import { Router } from '@angular/router';[m
+[31m-import { Auth } from '../../services/auth';[m
+[31m-import { RouterLink } from '@angular/router';[m
+[32m+[m[32mimport {Component, inject, signal} from '@angular/core';[m
+[32m+[m[32mimport {FormsModule} from '@angular/forms';[m
+[32m+[m[32mimport {Router, RouterLink} from '@angular/router';[m
+[32m+[m[32mimport {Auth} from '../../services/auth';[m
+[32m+[m
+ @Component({[m
+   selector: 'app-login',[m
+   imports: [FormsModule,RouterLink],[m
+[1mdiff --git a/frontend/src/app/pages/register/register.spec.ts b/frontend/src/app/pages/register/register.spec.ts[m
+[1mindex 02f8661..6482bfa 100644[m
+[1m--- a/frontend/src/app/pages/register/register.spec.ts[m
+[1m+++ b/frontend/src/app/pages/register/register.spec.ts[m
+[36m@@ -1,6 +1,6 @@[m
+[31m-import { ComponentFixture, TestBed } from '@angular/core/testing';[m
+[32m+[m[32mimport {ComponentFixture, TestBed} from '@angular/core/testing';[m
+ [m
+[31m-import { Register } from './register';[m
+[32m+[m[32mimport {Register} from './register';[m
+ [m
+ describe('Register', () => {[m
+   let component: Register;[m
+[1mdiff --git a/frontend/src/app/pages/register/register.ts b/frontend/src/app/pages/register/register.ts[m
+[1mindex 0d97033..fcccd99 100644[m
+[1m--- a/frontend/src/app/pages/register/register.ts[m
+[1m+++ b/frontend/src/app/pages/register/register.ts[m
+[36m@@ -1,8 +1,8 @@[m
+[31m-import { Component, signal, inject } from '@angular/core';[m
+[31m-import { FormsModule } from '@angular/forms';[m
+[31m-import { Router } from '@angular/router';[m
+[31m-import { Auth } from '../../services/auth';[m
+[31m-import { RouterLink } from '@angular/router';[m
+[32m+[m[32mimport {Component, inject, signal} from '@angular/core';[m
+[32m+[m[32mimport {FormsModule} from '@angular/forms';[m
+[32m+[m[32mimport {Router, RouterLink} from '@angular/router';[m
+[32m+[m[32mimport {Auth} from '../../services/auth';[m
+[32m+[m
+ @Component({[m
+   selector: 'app-register',[m
+   imports: [FormsModule,RouterLink],[m
+[1mdiff --git a/frontend/src/app/pages/task-form/task-form.spec.ts b/frontend/src/app/pages/task-form/task-form.spec.ts[m
+[1mindex a8d0ecc..ebe2a98 100644[m
+[1m--- a/frontend/src/app/pages/task-form/task-form.spec.ts[m
+[1m+++ b/frontend/src/app/pages/task-form/task-form.spec.ts[m
+[36m@@ -1,6 +1,6 @@[m
+[31m-import { ComponentFixture, TestBed } from '@angular/core/testing';[m
+[32m+[m[32mimport {ComponentFixture, TestBed} from '@angular/core/testing';[m
+ [m
+[31m-import { TaskForm } from './task-form';[m
+[32m+[m[32mimport {TaskForm} from './task-form';[m
+ [m
+ describe('TaskForm', () => {[m
+   let component: TaskForm;[m
+[1mdiff --git a/frontend/src/app/pages/task-form/task-form.ts b/frontend/src/app/pages/task-form/task-form.ts[m
+[1mindex 8c57c14..60330d1 100644[m
+[1m--- a/frontend/src/app/pages/task-form/task-form.ts[m
+[1m+++ b/frontend/src/app/pages/task-form/task-form.ts[m
+[36m@@ -1,8 +1,8 @@[m
+[31m-import { Component, signal, inject, OnInit } from '@angular/core';[m
+[31m-import { FormsModule } from '@angular/forms';[m
+[31m-import { Router, ActivatedRoute, RouterLink } from '@angular/router';[m
+[31m-import { TaskService } from '../../services/task';[m
+[31m-import { TaskPriority, TaskStatus } from '../../models/task';[m
+[32m+[m[32mimport {Component, inject, OnInit, signal} from '@angular/core';[m
+[32m+[m[32mimport {FormsModule} from '@angular/forms';[m
+[32m+[m[32mimport {ActivatedRoute, Router, RouterLink} from '@angular/router';[m
+[32m+[m[32mimport {TaskService} from '../../services/task';[m
+[32m+[m[32mimport {TaskPriority, TaskStatus} from '../../models/task';[m
+ [m
+ @Component({[m
+   selector: 'app-task-form',[m
+[1mdiff --git a/frontend/src/app/pages/tasks/tasks.spec.ts b/frontend/src/app/pages/tasks/tasks.spec.ts[m
+[1mindex 57ca4fe..167ad6e 100644[m
+[1m--- a/frontend/src/app/pages/tasks/tasks.spec.ts[m
+[1m+++ b/frontend/src/app/pages/tasks/tasks.spec.ts[m
+[36m@@ -1,6 +1,6 @@[m
+[31m-import { ComponentFixture, TestBed } from '@angular/core/testing';[m
+[32m+[m[32mimport {ComponentFixture, TestBed} from '@angular/core/testing';[m
+ [m
+[31m-import { Tasks } from './tasks';[m
+[32m+[m[32mimport {Tasks} from './tasks';[m
+ [m
+ describe('Tasks', () => {[m
+   let component: Tasks;[m
+[1mdiff --git a/frontend/src/app/pages/tasks/tasks.ts b/frontend/src/app/pages/tasks/tasks.ts[m
+[1mindex 6172791..e757a87 100644[m
+[1m--- a/frontend/src/app/pages/tasks/tasks.ts[m
+[1m+++ b/frontend/src/app/pages/tasks/tasks.ts[m
+[36m@@ -1,9 +1,9 @@[m
+[31m-import { Component, signal, inject, OnInit } from '@angular/core';[m
+[31m-import { FormsModule } from '@angular/forms';[m
+[31m-import { RouterLink, Router } from '@angular/router';[m
+[31m-import { TaskService } from '../../services/task';[m
+[31m-import { Auth } from '../../services/auth';[m
+[31m-import { Task, TaskStatus, TaskPriority } from '../../models/task';[m
+[32m+[m[32mimport {Component, inject, OnInit, signal} from '@angular/core';[m
+[32m+[m[32mimport {FormsModule} from '@angular/forms';[m
+[32m+[m[32mimport {Router, RouterLink} from '@angular/router';[m
+[32m+[m[32mimport {TaskService} from '../../services/task';[m
+[32m+[m[32mimport {Auth} from '../../services/auth';[m
+[32m+[m[32mimport {Task, TaskPriority, TaskStatus} from '../../models/task';[m
+ [m
+ @Component({[m
+   selector: 'app-tasks',[m
+[1mdiff --git a/frontend/src/app/services/auth-interceptor.ts b/frontend/src/app/services/auth-interceptor.ts[m
+[1mindex c342d88..7b29ea6 100644[m
+[1m--- a/frontend/src/app/services/auth-interceptor.ts[m
+[1m+++ b/frontend/src/app/services/auth-interceptor.ts[m
+[36m@@ -1,8 +1,8 @@[m
+[31m-import { HttpInterceptorFn } from '@angular/common/http';[m
+[31m-import { inject } from '@angular/core';[m
+[31m-import { Router } from '@angular/router';[m
+[31m-import { catchError, throwError } from 'rxjs';[m
+[31m-import { Auth } from './auth';[m
+[32m+[m[32mimport {HttpInterceptorFn} from '@angular/common/http';[m
+[32m+[m[32mimport {inject} from '@angular/core';[m
+[32m+[m[32mimport {Router} from '@angular/router';[m
+[32m+[m[32mimport {catchError, throwError} from 'rxjs';[m
+[32m+[m[32mimport {Auth} from './auth';[m
+ [m
+ export const authInterceptor: HttpInterceptorFn = (req, next) => {[m
+   const auth = inject(Auth);[m
+[1mdiff --git a/frontend/src/app/services/auth.spec.ts b/frontend/src/app/services/auth.spec.ts[m
+[1mindex 3a04d76..febd62f 100644[m
+[1m--- a/frontend/src/app/services/auth.spec.ts[m
+[1m+++ b/frontend/src/app/services/auth.spec.ts[m
+[36m@@ -1,6 +1,6 @@[m
+[31m-import { TestBed } from '@angular/core/testing';[m
+[32m+[m[32mimport {TestBed} from '@angular/core/testing';[m
+ [m
+[31m-import { Auth } from './auth';[m
+[32m+[m[32mimport {Auth} from './auth';[m
+ [m
+ describe('Auth', () => {[m
+   let service: Auth;[m
+[1mdiff --git a/frontend/src/app/services/auth.ts b/frontend/src/app/services/auth.ts[m
+[1mindex f8c58e1..88e855c 100644[m
+[1m--- a/frontend/src/app/services/auth.ts[m
+[1m+++ b/frontend/src/app/services/auth.ts[m
+[36m@@ -1,8 +1,8 @@[m
+[31m-import { Service, inject } from '@angular/core';[m
+[31m-import { HttpClient } from '@angular/common/http';[m
+[31m-import { Observable } from 'rxjs';[m
+[31m-import { LoginRequest, LoginResponse, RegisterRequest, User } from '../models/auth';[m
+[31m-import { environment } from '../environments/environment';[m
+[32m+[m[32mimport {inject, Service} from '@angular/core';[m
+[32m+[m[32mimport {HttpClient} from '@angular/common/http';[m
+[32m+[m[32mimport {Observable} from 'rxjs';[m
+[32m+[m[32mimport {LoginRequest, LoginResponse, RegisterRequest, User} from '../models/auth';[m
+[32m+[m[32mimport {environment} from '../environments/environment';[m
+ [m
+ @Service()[m
+ export class Auth {[m
+[1mdiff --git a/frontend/src/app/services/task.spec.ts b/frontend/src/app/services/task.spec.ts[m
+[1mindex 77a0b54..9ce3a46 100644[m
+[1m--- a/frontend/src/app/services/task.spec.ts[m
+[1m+++ b/frontend/src/app/services/task.spec.ts[m
+[36m@@ -1,6 +1,6 @@[m
+[31m-import { TestBed } from '@angular/core/testing';[m
+[32m+[m[32mimport {TestBed} from '@angular/core/testing';[m
+ [m
+[31m-import { Task } from './task';[m
+[32m+[m[32mimport {Task} from './task';[m
+ [m
+ describe('Task', () => {[m
+   let service: Task;[m
+[1mdiff --git a/frontend/src/app/services/task.ts b/frontend/src/app/services/task.ts[m
+[1mindex 3e72d11..afc9cea 100644[m
+[1m--- a/frontend/src/app/services/task.ts[m
+[1m+++ b/frontend/src/app/services/task.ts[m
+[36m@@ -1,8 +1,8 @@[m
+[31m-import { Service, inject } from '@angular/core';[m
+[31m-import { HttpClient } from '@angular/common/http';[m
+[31m-import { Observable } from 'rxjs';[m
+[31m-import { Task, TaskStatus, TaskPriority, CreateTaskRequest, UpdateTaskRequest } from '../models/task';[m
+[31m-import { environment } from '../environments/environment';[m
+[32m+[m[32mimport {inject, Service} from '@angular/core';[m
+[32m+[m[32mimport {HttpClient} from '@angular/common/http';[m
+[32m+[m[32mimport {Observable} from 'rxjs';[m
+[32m+[m[32mimport {CreateTaskRequest, Task, TaskPriority, TaskStatus, UpdateTaskRequest} from '../models/task';[m
+[32m+[m[32mimport {environment} from '../environments/environment';[m
+ [m
+ @Service()[m
+ export class TaskService {[m
+[1mdiff --git a/frontend/src/main.ts b/frontend/src/main.ts[m
+[1mindex 5df75f9..9c2613b 100644[m
+[1m--- a/frontend/src/main.ts[m
+[1m+++ b/frontend/src/main.ts[m
+[36m@@ -1,6 +1,6 @@[m
+[31m-import { bootstrapApplication } from '@angular/platform-browser';[m
+[31m-import { appConfig } from './app/app.config';[m
+[31m-import { App } from './app/app';[m
+[32m+[m[32mimport {bootstrapApplication} from '@angular/platform-browser';[m
+[32m+[m[32mimport {appConfig} from './app/app.config';[m
+[32m+[m[32mimport {App} from './app/app';[m
+ [m
+ bootstrapApplication(App, appConfig)[m
+   .catch((err) => console.error(err));[m
